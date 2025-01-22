@@ -145,9 +145,11 @@ entrez_genes_sig <- unique(universe[which(universe$ENSEMBL %in% sig_genes),]$ENT
 
 pvalue_ens_genes <- resdata$padj[which(resdata$padj<0.05)]
 names(pvalue_ens_genes)<-sig_genes
+pvalue_ens_genes
 
 pvalue_entrez_genes <- resdata$padj[which(resdata$padj<0.05)]
 names(pvalue_entrez_genes) <- entrez_genes_sig
+pvalue_entrez_genes
 
 
 ###################################
