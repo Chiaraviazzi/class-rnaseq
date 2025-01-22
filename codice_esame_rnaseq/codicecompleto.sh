@@ -113,7 +113,7 @@ plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
 resdata <- as_tibble(resOrdered)
 resdata$gene <- rownames(resOrdered)
 write_tsv(resdata, "analysis_results.tsv")
-
+#scrivere in console resdata per visualizzare la tabella direttamente in console altrimenti apri file resdata in ambiente
 
 ############################################
 ## CLUSTERING ##############################
