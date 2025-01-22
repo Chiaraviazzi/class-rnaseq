@@ -215,5 +215,3 @@ disgnet = enricher(entrez_genes_sig, TERM2GENE=disease2gene, TERM2NAME=disease2n
 
 cnetplot(disgnet, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
 
-
-save.image("deseq2_analysis.RData")
