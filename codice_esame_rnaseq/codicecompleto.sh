@@ -9,6 +9,8 @@ cd datiesame
 
 mkdir -p rawdata
 
+##fare la cartella rawdata, ma non ci entri dentro
+
 tar -xzvf data_rnaseq.tar.gz -C rawdata
 
 cd rawdata
@@ -32,7 +34,9 @@ salmon quant \
 echo -e "$name done now\n"
 done
 
-#spostarsi adesso sulla console e settare la working directory su datiesame
+##dopo aver fatto il ciclo in rawdata devo avere oltre ai campioni 6 cartelle con all'interno altri 6 file
+
+##spostarsi adesso sulla console e prima metti datiesame in alto e poi settare la working directory (session to file pane) su datiesame
 
 library(DESeq2)
 library(tximport)
@@ -113,6 +117,7 @@ plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
 resdata <- as_tibble(resOrdered)
 resdata$gene <- rownames(resOrdered)
 write_tsv(resdata, "analysis_results.tsv")
+
 #scrivere in console resdata per visualizzare la tabella direttamente in console altrimenti apri file resdata in ambiente
 
 ############################################
@@ -167,6 +172,8 @@ ego <- enrichGO( gene = sig_genes,
 
 ego
 
+##se esce 0 termini arricchiti non faccio né dotplot ne cnetplot
+
 dotplot(ego, showCategory=10)
 
 cnetplot(ego, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
@@ -211,7 +218,7 @@ disease2gene=gda[, c("diseaseId", "geneId")]
 disease2name=gda[, c("diseaseId", "diseaseName")]
 
 disgnet = enricher(entrez_genes_sig, TERM2GENE=disease2gene, TERM2NAME=disease2name)
-
+disgnet
 
 cnetplot(disgnet, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
 
